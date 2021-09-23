@@ -8,10 +8,19 @@ import { Observable, of } from 'rxjs';
 })
 export class HeroService {
 
+  heroList: Hero[] = HEROES;
+
   getHeroes(): Observable<Hero[]> {
-    const heroes = of(HEROES);
-    return heroes;
+    return of(this.heroList);
   }
 
-  constructor() { }
+
+  addHero(): void {
+    const newHero: Hero = {
+      id: this.heroList[this.heroList.length - 1].id + 1,
+      name: 'Random' + Math.trunc(Math.random() * 100)
+    };
+
+    this.heroList.push(newHero);
+  }
 }
